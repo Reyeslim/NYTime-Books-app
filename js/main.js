@@ -41,13 +41,31 @@ const createListElement = (data) => {
     const cardContentElement = document.createElement('div')
     cardContentElement.setAttribute('class', 'content')
 
+    const detailsBtnElement = document.createElement('button')
+    detailsBtnElement.setAttribute('class', 'details')
+    detailsBtnElement.innerText = 'Detalles'
+
+    // detailsBtnElement.onclick = async () => {
+    //     await startDetails(data.list_name_encoded)
+    //     window.location.replace('../html/details.html')
+    // }
+        
     const newestPublishedDate = createInfoElement(data.newest_published_date)
     const oldestPublishedDate = createInfoElement(data.oldest_published_date)
     const updated = createInfoElement(data.updated)
     
-    newCardElement.append(titleElement, newestPublishedDate, oldestPublishedDate, updated)
+    newCardElement.append(titleElement, newestPublishedDate, oldestPublishedDate, updated, detailsBtnElement)
     containerDivElement.append(newCardElement)
 }
+
+// async function startDetails(listName) {
+//     const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listName}.json?api-key=${NY_API_KEY}`)
+//     const data = await response.json()
+//     const books = data.results.books
+//     for (const book of books) {
+//         createListElement(book)        
+//     }
+// }
 
 
 async function start () {
