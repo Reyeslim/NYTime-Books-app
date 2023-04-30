@@ -1,6 +1,44 @@
+//Mapeo de datos para reutilizar
+
+/**
+ * @param {object} data
+ * @param {string} data.display_name
+ * @param {string} data.list_name
+ * @param {string} data.list_name_encoded
+ * @param {string} data.newest_published_date
+ * @param {string} data.oldest_published_date
+ * @param {string} data.updated
+ */
+
+
+const mapListToCard = (data) => ({
+    title: data.display_name,
+    info1: data.newest_published_date,
+    info2: data.oldest_published_date,
+    info3: data.updated,
+    ...data
+})
+
+/**
+ * @param {object} data
+ * @param {string} data.title
+ * @param {string} data.weeks_on_list
+ * @param {string} data.author
+ * @param {string} data.price
+ */
+
+const mapBookToCard = (data) => ({
+    title: data.title,
+    info1: data.author,
+    info2: data.price,
+    info3: data.weeks_on_list
+})
+
+
 // Elementos
 const containerDivElement = document.querySelector(".container");
 const spinnerDivElement = document.querySelector(".spinner");
+const booksDivElement = document.querySelector(".books")
 
 //Local Storage y API key
 
@@ -22,6 +60,11 @@ const setNyLists = (booksLists) => {
 
 //Funciones para pintar los datos de la api
 
+/**
+ * 
+ * @param {string} text 
+ */
+
 const createInfoElement = (text) => {
     const infoElement = document.createElement('p')
     infoElement.setAttribute('class', 'info')
@@ -30,55 +73,89 @@ const createInfoElement = (text) => {
     return infoElement
 }
 
-const createListElement = (data) => {
+/**
+ * @param {object} data
+ * @param {string} data.title
+ * @param {string} data.info1
+ * @param {string} data.info2
+ * @param {string} data.info3
+ * @param {string} data.list_name_encoded
+ * @param {boolean} isDetails
+ */
+
+const createListElement = (data, isDetails = false) => {
     const newCardElement = document.createElement('div')
     newCardElement.setAttribute('class', 'card')
 
     const titleElement = document.createElement('p')
     titleElement.setAttribute('class', 'title')
-    titleElement.innerText = data.display_name
+    titleElement.innerText = data.title
 
     const cardContentElement = document.createElement('div')
     cardContentElement.setAttribute('class', 'content')
 
-    const detailsBtnElement = document.createElement('button')
-    detailsBtnElement.setAttribute('class', 'details')
-    detailsBtnElement.innerText = 'Detalles'
+    const newestPublishedDate = createInfoElement(data.info1)
+    const oldestPublishedDate = createInfoElement(data.info2)
+    const updated = createInfoElement(data.info3)
 
-    // detailsBtnElement.onclick = async () => {
-    //     await startDetails(data.list_name_encoded)
-    //     window.location.replace('../html/details.html')
-    // }
-        
-    const newestPublishedDate = createInfoElement(data.newest_published_date)
-    const oldestPublishedDate = createInfoElement(data.oldest_published_date)
-    const updated = createInfoElement(data.updated)
-    
-    newCardElement.append(titleElement, newestPublishedDate, oldestPublishedDate, updated, detailsBtnElement)
-    containerDivElement.append(newCardElement)
+    cardContentElement.append(newestPublishedDate, oldestPublishedDate, updated)
+
+    if (!isDetails) {
+        const detailsBtnElement = document.createElement('button')
+        detailsBtnElement.setAttribute('class', 'details')
+        detailsBtnElement.innerText = 'Detalles'
+
+        detailsBtnElement.onclick = async () => {
+            await bookDetails(data.list_name_encoded)
+        }
+
+        cardContentElement.appendChild(detailsBtnElement)
+    } else {
+        const favBtnElement = document.createElement('button')
+        favBtnElement.setAttribute('class', 'favorite')
+        favBtnElement.innerText = 'Añadir a favoritos'
+        cardContentElement.appendChild(favBtnElement)
+    }
+
+    newCardElement.append(titleElement, cardContentElement)
+
+    if (!isDetails) {
+        containerDivElement.append(newCardElement)
+    } else {
+        booksDivElement.appendChild(newCardElement)
+    }
+
 }
 
-// async function startDetails(listName) {
-//     const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listName}.json?api-key=${NY_API_KEY}`)
-//     const data = await response.json()
-//     const books = data.results.books
-//     for (const book of books) {
-//         createListElement(book)        
-//     }
-// }
-
-
-async function start () {
-    let booksLists = getNyLists();
-    const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${NY_API_KEY}`)
+async function bookDetails(listName) {
+    const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listName}.json?api-key=${NY_API_KEY}`)
     const data = await response.json()
-    booksLists = data.results
-    console.log(booksLists)
-    setNyLists(booksLists)
+    const books = data.results.books
+    booksDivElement.setAttribute('class', 'books')
+    containerDivElement.setAttribute('class', 'disabled')
+    console.log(books)
+    for (const book of books) {
+        createListElement(mapBookToCard(book), true)
+    }
+}
+
+
+async function start() {
+    let booksLists = getNyLists();
+    if (!booksLists || booksLists.length <= 0) {
+        const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${NY_API_KEY}`)
+        const data = await response.json()
+        booksLists = data.results
+        console.log(booksLists)
+        setNyLists(booksLists)
+    }
+
 
     for (const list of booksLists) {
-        createListElement(list)
+        createListElement(mapListToCard(list))
     }
+    containerDivElement.setAttribute('class', 'container')
+    spinnerDivElement.setAttribute('class', 'disabled')
 }
 
 start()

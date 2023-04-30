@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+
+* {
+    box-sizing:border-box;
+}
+
+form {
+    font-family: 'Josefin Sans', sans-serif;
+	width:300px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:#b0e4dead;
+}
+
+legend {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+label {
+	width:72px;
+	font-weight:bold;
+	display:inline-block;
+    margin-right: 10px;
+}
+
+input[type="email"],
+    input[type="password"] {
+	    width:180px;
+	    padding:3px 10px;
+	    border:1px solid #f6f6f6;
+	    border-radius:6px;
+	    background-color:#f6f6f6;
+	    margin:8px 0;
+	    display:inline-block;
+}
+
+button {
+	width:100%;
+	padding:8px 16px;
+	margin-top:32px;
+	border:1px solid #407a81;
+	border-radius:5px;
+	display:block;
+	color:#fff;
+	background-color:#407a81;
+    font-family: 'Josefin Sans', sans-serif;;
+} 
+
+button:hover{
+	cursor:pointer;
+    background-color: #0f5357;
+}

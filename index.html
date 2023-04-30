@@ -14,7 +14,9 @@
     <header>
         <h1>The New York Times</h1>
         <nav>
-            <button class="logout"><i class="fa-solid fa-power-off btn-icon"></i></button>            
+            <button class="fav">Libros favoritos</button>
+            <button class="logout">Cerrar sesión</i></button>  
+            <!-- <i class="fa-solid fa-power-off btn-icon"></i>-->
         </nav>
     </header>
     <main>
@@ -23,17 +25,23 @@
 
         </div>
 
+        <div class="books disabled">
+
+        </div>
+
         <div class="spinner">
-            <p>CARGANDO...</p>
             <i class="fa-solid fa-spinner fa-spin-pulse spinner-icon"></i>
         </div>
 
     </main>
 
     <footer>
-
+        <br>
+        <p>&copy; The New York Times 2023</p>
     </footer>
+    <script type="module" src="./js/firebase.js"></script>
+    <script type="module" src="./js/login.js"></script>
     <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./js/details.js"></script>
+    
 </body>
 </html>
