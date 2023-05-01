@@ -5,29 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NY Times - Inicia sesión</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.ico.png">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/login.css">
+    <title>NY Times - Inicia sesión</title>
+
 </head>
 
 <body>
-    <div class="form">
-        <form id="login-form">
-            <legend>Inicia sesión</legend>
-            
-            <br><br>
-            
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+    <header>
+        <h1>The New York Times</h1>
+        <nav>
+            <button class="signup">Crear cuenta</button>
+        </nav>
+    </header>
+    <main class="wrapper">
+        <div class="form">
+            <form id="login-form">
+                <legend>Inicia sesión</legend>
 
-            <br><br>
+                <br><br>
 
-            <label for="login-password">Contraseña</label>
-            <input type="password" id="login-password" placeholder="******" required>
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Correo electrónico" required>
 
-            <button type="submit">Inicia sesión</button>
-        </form>
+                <br><br>
 
-    </div>
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" placeholder="******" required>
+
+                <button class="create" type="submit">Inicia sesión</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <br>
+        <p>&copy; The New York Times 2023</p>
+    </footer>
     <script src="../js/firebase.js" type="module"></script>
     <script src="../js/login.js" type="module"></script>
 </body>

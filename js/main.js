@@ -39,6 +39,8 @@ const mapBookToCard = (data) => ({
 const containerDivElement = document.querySelector(".container");
 const spinnerDivElement = document.querySelector(".spinner");
 const booksDivElement = document.querySelector(".books")
+const favListElement = document.querySelector(".fav")
+const favDivElement = document.querySelector(".favorites")
 
 //Local Storage y API key
 
@@ -111,10 +113,20 @@ const createListElement = (data, isDetails = false) => {
 
         cardContentElement.appendChild(detailsBtnElement)
     } else {
-        const favBtnElement = document.createElement('button')
+        const favBtnElement = document.createElement('input')
+        favBtnElement.setAttribute('type', 'checkbox')
         favBtnElement.setAttribute('class', 'favorite')
-        favBtnElement.innerText = 'Añadir a favoritos'
-        cardContentElement.appendChild(favBtnElement)
+        favBtnElement.setAttribute('id', 'fav')
+        
+        const btnIcon = document.createElement('label')
+        btnIcon.setAttribute('for', 'fav')
+        btnIcon.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-top: 20px;"></i>'
+        
+        btnIcon.onclick = () => {
+            btnIcon.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-top: 20px;"></i>'
+            
+        }
+        cardContentElement.append(btnIcon, favBtnElement)
     }
 
     newCardElement.append(titleElement, cardContentElement)
@@ -126,6 +138,10 @@ const createListElement = (data, isDetails = false) => {
     }
 
 }
+
+favListElement.addEventListener('click', (e) => {
+    window.location.replace('../forms/fav.html')
+})
 
 async function bookDetails(listName) {
     const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listName}.json?api-key=${NY_API_KEY}`)

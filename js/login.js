@@ -22,8 +22,8 @@ import {
   if (signupFormElement) {
     signupFormElement.addEventListener('submit', async (e) => {
       e.preventDefault()
-      const email = signupFormElement['login-email'].value
-      const password = signupFormElement['login-password'].value
+      const email = signupFormElement['signup-email'].value
+      const password = signupFormElement['signup-password'].value
       await signup(email, password)
     })
   }
