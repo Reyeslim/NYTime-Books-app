@@ -6,6 +6,11 @@
     box-sizing:border-box;
 }
 
+a {
+	color: #000;
+	text-decoration: none;
+}
+
 form {
     font-family: 'Josefin Sans', sans-serif;
 	width:450px;
@@ -53,6 +58,10 @@ input[type="email"],
 	background-color:#407a81;
     font-family: 'Josefin Sans', sans-serif;;
 } 
+
+#google-login {
+	margin-top:10px;
+}
 
 .create:hover{
 	cursor:pointer;

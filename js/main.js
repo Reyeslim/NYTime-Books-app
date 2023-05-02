@@ -1,3 +1,31 @@
+import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
+
+import { auth } from './firebase.js'
+
+
+const loggedUrls = ['../index.html']
+const publicUrls = ['../forms/login.html', '..forms/signup.html']
+
+onAuthStateChanged(auth, (user) => {
+    const currentPath = window.location.pathname
+    if (user) {
+        if (loggedUrls.includes(currentPath)) {
+            window.location.replace('../index.html')
+        }
+    } else {
+        if (publicUrls.includes(currentPath)) {
+            window.location.replace('../forms/login.html')
+        }
+    }
+})
+
+const logout = document.querySelector('.logout')
+
+logout.addEventListener('click', async () => {
+    await signOut(auth)
+    window.location.replace('../forms/login.html')
+})
+
 //Mapeo de datos para reutilizar
 
 /**
@@ -117,14 +145,14 @@ const createListElement = (data, isDetails = false) => {
         favBtnElement.setAttribute('type', 'checkbox')
         favBtnElement.setAttribute('class', 'favorite')
         favBtnElement.setAttribute('id', 'fav')
-        
+
         const btnIcon = document.createElement('label')
         btnIcon.setAttribute('for', 'fav')
         btnIcon.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-top: 20px;"></i>'
-        
+
         btnIcon.onclick = () => {
             btnIcon.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-top: 20px;"></i>'
-            
+
         }
         cardContentElement.append(btnIcon, favBtnElement)
     }

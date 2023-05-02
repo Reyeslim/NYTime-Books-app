@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../img/logo.ico.png">
     <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/login.css">
     <title>NY Times - Inicia sesión</title>
@@ -17,7 +18,7 @@
     <header>
         <h1>The New York Times</h1>
         <nav>
-            <button class="signup">Crear cuenta</button>
+            <button class="signup"><a href="./signup.html">Crear cuenta</a></button>
         </nav>
     </header>
     <main class="wrapper">
@@ -36,7 +37,10 @@
                 <input type="password" id="login-password" placeholder="******" required>
 
                 <button class="create" type="submit">Inicia sesión</button>
+                <button type="button" id="google-login" class="create">Google</button>
             </form>
+
+            
         </div>
     </main>
 
@@ -44,8 +48,10 @@
         <br>
         <p>&copy; The New York Times 2023</p>
     </footer>
-    <script src="../js/firebase.js" type="module"></script>
+    <!-- <script src="../js/firebase.js" type="module"></script> -->
+    <script src="../js/googleLogin.js" type="module"></script>
     <script src="../js/login.js" type="module"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
