@@ -12,51 +12,51 @@ a {
 }
 
 form {
-    font-family: 'Josefin Sans', sans-serif;
-	width:450px;
-	padding:16px;
-	border-radius:10px;
-	margin: 80px auto;
 	background-color:#b0e4dead;
+	border-radius:10px;
+    font-family: 'Josefin Sans', sans-serif;
+	margin: 80px auto;
+	padding:16px;
 	text-align: center;
+	width:450px;
 }
 
 legend {
-    text-align: center;
-    font-size: 20px;
+	font-size: 20px;
     font-weight: bold;
-    margin-top: 10px;
 	margin-left: 160px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 label {
-	width:72px;
-	font-weight:bold;
 	display:inline-block;
+	font-weight:bold;
     margin-right: 15px;
+	width:72px;
 }
 
 input[type="email"],
     input[type="password"] {
-	    width:180px;
-	    padding:3px 10px;
 	    border:1px solid #f6f6f6;
 	    border-radius:6px;
 	    background-color:#f6f6f6;
-	    margin:8px 0;
 	    display:inline-block;
+		margin:8px 0;
+		padding:3px 10px;
+		width:180px;
 }
 
 .create {
-	width:100%;
-	padding:8px 16px;
-	margin-top:32px;
+	background-color:#407a81;
 	border:1px solid #407a81;
 	border-radius:5px;
-	display:block;
 	color:#fff;
-	background-color:#407a81;
-    font-family: 'Josefin Sans', sans-serif;;
+	display:block;
+	font-family: 'Josefin Sans', sans-serif;
+	margin-top:32px;
+	padding:8px 16px;
+	width:100%;
 } 
 
 #google-login {
@@ -64,6 +64,6 @@ input[type="email"],
 }
 
 .create:hover{
-	cursor:pointer;
     background-color: #0f5357;
+	cursor:pointer;
 }

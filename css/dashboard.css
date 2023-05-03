@@ -14,14 +14,14 @@ html, body {
 }
 
 .wrapper {
-    min-height: 100%;
     margin-bottom: -80px;
+    min-height: 100%;
 }
 
 header {
+    background-color: #add8e6;
     display: flex;
     justify-content: space-between;
-    background-color: lightblue;
 }
 
 footer, .push {
@@ -29,24 +29,24 @@ footer, .push {
 }
 
 footer {
-    background-color: lightblue;
+    background-color: #add8e6;
     margin-top: 5px;
     text-align: center;
 }
 
 footer p {
-    font-size: 20px;
     font-family: 'Eczar', serif;
+    font-size: 20px;
     margin: 10px;
 }
 
 h1 {
-    margin-left: 15px;
     font-family: 'Eczar', serif;
+    margin-left: 15px;
 }
 
 nav {
-    background-color: lightblue;
+    background-color: #add8e6;
 }
 
 .logout, .fav, .home, .login, .signup{
@@ -57,12 +57,16 @@ nav {
 
 
 .card, .book-card {
-    border: 1px solid lightblue;
+    border: 1px solid #add8e6;
     border-radius: 5px;
-    height: 250px;
+    height: 400px;
     margin: 5px;
     text-align: center;
     width: 300px;
+}
+
+.book-img {
+    width: 100px;
 }
 
 .container, .books {
@@ -73,8 +77,8 @@ nav {
 }
 
 .spinner {
-    text-align: center;
     font-size: 50px;
+    text-align: center;
 }
 
 .disabled, #fav {
@@ -82,8 +86,7 @@ nav {
 }
 
 .title {
-    
-    border-bottom: 1px solid lightblue;
+    border-bottom: 1px solid #add8e6;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 15px;
     font-weight: bold;
@@ -98,14 +101,14 @@ nav {
 
 
 .details, .fav, .logout, .favorite, .home, .login, .signup {
-    background-color: aliceblue;
-    border: 1px solid lightblue;
+    background-color: #f0f8ff;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     font-family: 'Josefin Sans', sans-serif;
     padding: 5px;
 }
 
 .details:hover, .fav:hover, .logout:hover, .favorite:hover , .home:hover, .login:hover, .signup:hover{
-    background-color: rgb(109, 201, 232);
+    background-color: #6DC9E8;
     cursor: pointer;
 }
