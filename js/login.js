@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js'
+import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js'
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
 
