@@ -1,29 +1,12 @@
-import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js'
-
+import { signOut } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js'
 import { auth } from './firebase.js'
 
-
-const loggedUrls = ['../index.html']
-const publicUrls = ['../forms/login.html', '..forms/signup.html']
-
-onAuthStateChanged(auth, (user) => {
-    const currentPath = window.location.pathname
-    if (user) {
-        if (loggedUrls.includes(currentPath)) {
-            window.location.replace('../index.html')
-        }
-    } else {
-        if (publicUrls.includes(currentPath)) {
-            window.location.replace('../forms/login.html')
-        }
-    }
-})
 
 const logout = document.querySelector('.logout')
 
 logout.addEventListener('click', async () => {
     await signOut(auth)
-    window.location.replace('../forms/login.html')
+    window.location.replace('/NYTime-Books-app/forms/login.html')
 })
 
 //Mapeo de datos para reutilizar
