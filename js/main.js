@@ -156,9 +156,9 @@ const createListElement = (data, isDetails = false) => {
 
 }
 
-// favListElement.addEventListener('click', (e) => {
-//     window.location.replace('../forms/fav.html')
-// })
+favListElement.addEventListener('click', (e) => {
+    window.location.replace('../forms/fav.html')
+})
 
 async function bookDetails(listName) {
     const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listName}.json?api-key=${NY_API_KEY}`)
