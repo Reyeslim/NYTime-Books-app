@@ -55,12 +55,19 @@ input[type="email"],
 	display:block;
 	font-family: 'Josefin Sans', sans-serif;
 	margin-top:32px;
+	margin-right: 10px;
 	padding:8px 16px;
 	width:100%;
 } 
 
-#google-login {
+#google-login, #github-login, #facebook-login {
 	margin-top:10px;
+}
+
+.social {
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
 }
 
 .create:hover{

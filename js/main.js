@@ -56,6 +56,7 @@ const favListElement = document.querySelector(".fav")
 //Local Storage y API key
 
 const NY_BOOKS_LIST_KEY = 'nyBooksLists';
+const FAV_BOOKS = 'favBooks';
 const NY_API_KEY = 'F3kUhFZ3aXqKzEeop5tA7nx13adSA0jR';
 
 //Recuperamos las listas de libros desde Local Storage
@@ -71,6 +72,23 @@ const setNyLists = (booksLists) => {
     window.localStorage.setItem(NY_BOOKS_LIST_KEY, JSON.stringify(booksLists))
 }
 
+
+//Recuperamos favs desde Local Storage
+
+const getFavBooks = () => {
+    const response = window.localStorage.getItem(FAV_BOOKS)
+    return response ? JSON.parse(response) : []
+}
+
+//Guardamos favs de libros en Local Storage
+
+const setFavBooks = (title) => {
+    const currentFavBooks = getFavBooks()
+    window.localStorage.setItem(FAV_BOOKS, JSON.stringify([...currentFavBooks, title]))
+}
+
+
+
 //Funciones para pintar los datos de la api
 
 /**
@@ -85,6 +103,16 @@ const createInfoElement = (text) => {
 
     return infoElement
 }
+
+/**
+ * 
+ * @param {string} title 
+ */
+function addFavoritesBookToFirestore(title) {
+    setFavBooks(title)
+    window.location.replace('../forms/fav.html')
+}
+
 
 /**
  * @param {object} data
@@ -129,21 +157,23 @@ const createListElement = (data, isDetails = false) => {
         imgElement.setAttribute('class', 'book-img')
         imgElement.src = `${data.book_image}`
         
+        const currentFavBooks = getFavBooks()
+        const isFav = currentFavBooks.find(title => title === data.title)
 
-        const favBtnElement = document.createElement('input')
-        favBtnElement.setAttribute('type', 'checkbox')
+        const favBtnElement = document.createElement('div')
+        // favBtnElement.setAttribute('type', 'checkbox')
         favBtnElement.setAttribute('class', 'favorite')
         favBtnElement.setAttribute('id', 'fav')
 
-        const btnIcon = document.createElement('label')
-        btnIcon.setAttribute('for', 'fav')
-        btnIcon.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
+        // const btnIcon = document.createElement('label')
+        // btnIcon.setAttribute('for', 'fav')
+        favBtnElement.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
 
-        btnIcon.onclick = () => {
-            btnIcon.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
-
+        favBtnElement.onclick = () => {
+            favBtnElement.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
+            addFavoritesBookToFirestore(data.title)
         }
-        cardContentElement.append(imgElement, btnIcon, favBtnElement)
+        cardContentElement.append(imgElement, favBtnElement)
     }
     
     newCardElement.append(titleElement, cardContentElement)

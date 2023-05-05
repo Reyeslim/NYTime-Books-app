@@ -86,7 +86,7 @@ nav {
     text-align: center;
 }
 
-.disabled, #fav {
+.disabled {
     display: none;
 }
 
@@ -105,7 +105,7 @@ nav {
 }
 
 
-.details, .fav, .logout, .favorite, .home, .login, .signup {
+.details, .fav, .logout, .home, .login, .signup {
     background-color: #f0f8ff;
     border: 1px solid #add8e6;
     border-radius: 5px;
@@ -113,7 +113,12 @@ nav {
     padding: 5px;
 }
 
-.details:hover, .fav:hover, .logout:hover, .favorite:hover , .home:hover, .login:hover, .signup:hover{
+.details:hover, .fav:hover, .logout:hover , .home:hover, .login:hover, .signup:hover{
     background-color: #6DC9E8;
     cursor: pointer;
 }
+
+/* .favorite-empty {
+    background-image: url('https://fontawesome.com/icons/heart?f=classic&s=regular');
+    color:#000;
+} */
