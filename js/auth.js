@@ -1,7 +1,6 @@
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js'
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { collection, addDoc, getDocs, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
 import { auth, db } from "./firebase.js";
-import { setupFavs } from './favList.js'; 
 
 
 const loggedUrls = ['/index.html', '/forms/fav.html']
@@ -11,8 +10,16 @@ onAuthStateChanged(auth, async (user) => {
     const currentPath = window.location.pathname
     // console.log({currentPath, user})
     if (user) {
-        const consulta = await getDocs(collection(db, 'favoritos'))
-        setupFavs(consulta.docs)
+        try {
+            const userRef = await addDoc(collection(db, 'user'), {
+                email: user.email
+            })
+            console.log("Document written with ID: ", userRef.id);
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+
+        console.log(user.email)
         if (publicUrls.includes(currentPath)) {
             window.location.replace('../index.html')
         }

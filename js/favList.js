@@ -1,29 +1,65 @@
+import { collection, addDoc, getDocs, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { db } from './firebase.js'
+
+
 const favList = document.querySelector('.favs')
 
-export const setupFavs = (data) => {
-    if (data.length) {
+// try {
+//     const userRef = await addDoc(collection(db, "users"), {
+//         first: "Ada",
+//         last: "Lovelace",
+//         born: 1815
+//     })
+//     console.log("Document written with ID: ", userRef.id);
+// } catch (e) {
+//   console.error("Error adding document: ", e);
+// }
+
+// const querySnapshot = await getDocs(collection(db, "users"))
+// querySnapshot.forEach((doc) => {
+//     console.log(`${doc.id} => ${doc.data()}`)
+// })
+
+
+// try {
+//     const booksRef = await addDoc(collection(db, "books"), {
+//         title: "",
+//     })
+//     console.log("Document written with ID: ", booksRef.id);
+// } catch (e) {
+//   console.error("Error adding document: ", e);
+// }
+
+// const querySnapshotBooks = await getDocs(collection(db, "books"))
+// querySnapshot.forEach((doc) => {
+//     console.log(`${doc.id} => ${doc.data()}`)
+// })
+
+
+// export const setupFavs = (data) => {
+//     if (data.length) {
         
-        let html = ''
+//         let html = ''
 
-        data.forEach(doc => {
+//         data.forEach(doc => {
             
-            const fav = doc.data()
-            const content = `<ul>
-            <li class="list-group">
-            <h5>${fav.title}</h5>
-            <p>${fav.content}</p>
-            </li>
-            </ul>`
+//             const fav = doc.data()
+//             const content = `<ul>
+//             <li class="list-group">
+//             <h5>${fav.title}</h5>
+//             <p>${fav.content}</p>
+//             </li>
+//             </ul>`
 
-            console.log(fav)
-            html += content
-        })
+//             console.log(fav)
+//             html += content
+//         })
 
-        favList.innerHTML = html
-    } else {
-        favList.innerHTML = '<h2> No hay favoritos todavía </h2>'
-    }
-}
+//         favList.innerHTML = html
+//     } else {
+//         favList.innerHTML = '<h2> No hay favoritos todavía </h2>'
+//     }
+// }
 
 // const createInfoElement = (text) => {
 //     const infoElement = document.createElement('p')

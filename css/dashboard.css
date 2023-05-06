@@ -118,7 +118,21 @@ nav {
     cursor: pointer;
 }
 
-/* .favorite-empty {
-    background-image: url('https://fontawesome.com/icons/heart?f=classic&s=regular');
-    color:#000;
-} */
+.favorite-selected {
+
+    background-color:#ff0000;
+    border: 1px solid black;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 220px; 
+    width: 40px;
+}
+
+.favorite-empty {
+    background-color:#FFF;
+    border: 1px solid black;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 220px; 
+    width: 40px;
+}

@@ -1,5 +1,6 @@
 import { signOut } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js'
-import { auth } from './firebase.js'
+import { collection, addDoc, getDocs, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { saveFav, auth, db } from './firebase.js'
 
 
 const logout = document.querySelector('.logout')
@@ -82,9 +83,8 @@ const getFavBooks = () => {
 
 //Guardamos favs de libros en Local Storage
 
-const setFavBooks = (title) => {
-    const currentFavBooks = getFavBooks()
-    window.localStorage.setItem(FAV_BOOKS, JSON.stringify([...currentFavBooks, title]))
+const setFavBooks = (favBooksLists) => {
+    window.localStorage.setItem(FAV_BOOKS, JSON.stringify(favBooksLists))
 }
 
 
@@ -108,9 +108,19 @@ const createInfoElement = (text) => {
  * 
  * @param {string} title 
  */
-function addFavoritesBookToFirestore(title) {
-    setFavBooks(title)
-    window.location.replace('../forms/fav.html')
+async function addFavoritesBookToFirestore(title) {
+    const currentFavBooks = getFavBooks()
+    const exists = currentFavBooks.find(item => item === title)
+
+    if(!exists) {
+        setFavBooks([...currentFavBooks, title])
+        saveFav(title)
+        
+    } else {
+        setFavBooks(currentFavBooks.filter((item) => item !== title))
+    }
+
+    window.location.reload()
 }
 
 
@@ -162,15 +172,15 @@ const createListElement = (data, isDetails = false) => {
 
         const favBtnElement = document.createElement('div')
         // favBtnElement.setAttribute('type', 'checkbox')
-        favBtnElement.setAttribute('class', 'favorite')
+        favBtnElement.classList.add(isFav ? 'favorite-selected' : 'favorite-empty')
         favBtnElement.setAttribute('id', 'fav')
 
         // const btnIcon = document.createElement('label')
         // btnIcon.setAttribute('for', 'fav')
-        favBtnElement.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
+        // favBtnElement.innerHTML = '<i class="fa-regular fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
 
         favBtnElement.onclick = () => {
-            favBtnElement.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
+            // favBtnElement.innerHTML = '<i class="fa-solid fa-heart" style="color: #ff0000; font-size: 25px; margin-left: 200px; margin-bottom: 20px; cursor: pointer;"></i>'
             addFavoritesBookToFirestore(data.title)
         }
         cardContentElement.append(imgElement, favBtnElement)
